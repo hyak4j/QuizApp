@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/answer_button.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -16,24 +17,16 @@ class _QuizState extends State<QuestionsScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('The quesion'),
-          SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () {}, 
-            child: const Text('Answer 1'),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 2'),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 3'),
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            child: const Text('Answer 4'),
-          ),
+          const Text(
+            'The quesion',
+            style: TextStyle(
+              color: Colors.white
+            ),),
+          const SizedBox(height: 30),
+          AnswerButton(answerText: 'Answer1 text...', onTap: (){}),
+          AnswerButton(answerText: 'Answer2 text...', onTap: (){}),
+          AnswerButton(answerText: 'Answer3 text...', onTap: (){}),
+          AnswerButton(answerText: 'Answer4 text...', onTap: (){}),
         ],
       ),
     );

@@ -11,9 +11,18 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuizState extends State<QuestionsScreen> {
+  var currentQuestionIndex = 0;
+
+  void answerQuestion() {
+    setState(() {
+      // 答題後換下一題
+      currentQuestionIndex++;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[0]; // 自'package:quiz/data/questions.dart';載入的資料
+    final currentQuestion = questions[currentQuestionIndex]; // 自'package:quiz/data/questions.dart';載入的資料
 
     return SizedBox(
       width: double.infinity,
@@ -35,7 +44,7 @@ class _QuizState extends State<QuestionsScreen> {
             // 選項
             ...currentQuestion.getShuffledAnswers().map((answer) {
               // 原先形成另外的List，...可拼接到原List<Widget>當中
-              return AnswerButton(answerText: answer, onTap: (){});
+              return AnswerButton(answerText: answer, onTap: answerQuestion);
             }),
           ],
         ),

@@ -33,7 +33,7 @@ class _QuizState extends State<QuestionsScreen> {
             ),
             const SizedBox(height: 30),
             // 選項
-            ...currentQuestion.answers.map((answer) {
+            ...currentQuestion.getShuffledAnswers().map((answer) {
               // 原先形成另外的List，...可拼接到原List<Widget>當中
               return AnswerButton(answerText: answer, onTap: (){});
             }),

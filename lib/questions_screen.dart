@@ -13,24 +13,32 @@ class QuestionsScreen extends StatefulWidget {
 class _QuizState extends State<QuestionsScreen> {
   @override
   Widget build(BuildContext context) {
-    final currentQuestion = questions[0];
+    final currentQuestion = questions[0]; // 自'package:quiz/data/questions.dart';載入的資料
 
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            currentQuestion.text,
-            style: TextStyle(
-              color: Colors.white
-            ),),
-          const SizedBox(height: 30),
-          AnswerButton(answerText: currentQuestion.answers[0], onTap: (){}),
-          AnswerButton(answerText: currentQuestion.answers[1], onTap: (){}),
-          AnswerButton(answerText: currentQuestion.answers[2], onTap: (){}),
-          AnswerButton(answerText: currentQuestion.answers[3], onTap: (){}),
-        ],
+      child: Container(
+        margin: EdgeInsets.all(40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // 題目
+            Text(
+              currentQuestion.text,
+              style: TextStyle(
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            // 選項
+            ...currentQuestion.answers.map((answer) {
+              // 原先形成另外的List，...可拼接到原List<Widget>當中
+              return AnswerButton(answerText: answer, onTap: (){});
+            }),
+          ],
+        ),
       ),
     );
   }

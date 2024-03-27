@@ -6,7 +6,10 @@ import 'package:quiz/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
+
+  final void Function(String answer) onSelectAnswer;
+
   @override
   State<QuestionsScreen> createState() {
    return _QuizState();
@@ -16,7 +19,8 @@ class QuestionsScreen extends StatefulWidget {
 class _QuizState extends State<QuestionsScreen> {
   var currentQuestionIndex = 0;
 
-  void answerQuestion() {
+  void answerQuestion(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       // 答題後換下一題
       currentQuestionIndex++;
@@ -49,7 +53,12 @@ class _QuizState extends State<QuestionsScreen> {
             // 選項
             ...currentQuestion.getShuffledAnswers().map((answer) {
               // 原先形成另外的List，...可拼接到原List<Widget>當中
-              return AnswerButton(answerText: answer, onTap: answerQuestion);
+              return AnswerButton(
+                answerText: answer, 
+                onTap: (){
+                  answerQuestion(answer);
+                }
+              );
             }),
           ],
         ),

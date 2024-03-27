@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:quiz/data/questions.dart';
 import 'package:quiz/questions_screen.dart';
 import 'package:quiz/start_screen.dart';
 
@@ -12,6 +13,7 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+ List<String> selectedAnswers = [];
  var activeScreen = 'start-screen';
 
   void switchScreen() {
@@ -19,12 +21,28 @@ class _QuizState extends State<Quiz> {
       activeScreen = 'questions-screen';
     });
   }
+
+  void chooseAnswer(String answer) {
+    // 紀錄所選答案
+    selectedAnswers.add(answer);
+
+    if (selectedAnswers.length == questions.length) {
+      // 答題完成時導頁
+      setState(() {
+        activeScreen = 'start-screen';
+        selectedAnswers = []; // 清空紀錄
+      });
+    }
+  }
+
   @override
   Widget build(context) {
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(
+        onSelectAnswer: chooseAnswer
+      );
     }
 
     return MaterialApp(

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:quiz/data/questions.dart';
 import 'package:quiz/questions_screen.dart';
 import 'package:quiz/start_screen.dart';
+import 'package:quiz/result_screen.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -29,7 +30,7 @@ class _QuizState extends State<Quiz> {
     if (selectedAnswers.length == questions.length) {
       // 答題完成時導頁
       setState(() {
-        activeScreen = 'start-screen';
+        activeScreen = 'results-screen';
         selectedAnswers = []; // 清空紀錄
       });
     }
@@ -42,6 +43,12 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == 'questions-screen') {
       screenWidget = QuestionsScreen(
         onSelectAnswer: chooseAnswer
+      );
+    }
+
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultScreen(
+        chosenAnswers: selectedAnswers,
       );
     }
 

@@ -34,7 +34,7 @@ class ResultScreen extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.all(40),
         child: Column(children: [
-          const Text('You answered X out of Y questions correctly!'),
+          Text('You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
           const SizedBox(height: 30,),
           QuestionSummary(summaryData),
           const Text('List of answers and questions...'),

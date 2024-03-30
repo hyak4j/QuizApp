@@ -20,6 +20,7 @@ class _QuizState extends State<Quiz> {
   void switchScreen() {
     setState(() {
       activeScreen = 'questions-screen';
+      selectedAnswers = []; // 清空紀錄
     });
   }
 
@@ -31,7 +32,6 @@ class _QuizState extends State<Quiz> {
       // 答題完成時導頁
       setState(() {
         activeScreen = 'results-screen';
-        // selectedAnswers = []; // 清空紀錄
       });
     }
   }
@@ -49,6 +49,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == 'results-screen') {
       screenWidget = ResultScreen(
         chosenAnswers: selectedAnswers,
+        onRestartQuiz: switchScreen
       );
     }
 

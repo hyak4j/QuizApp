@@ -34,11 +34,19 @@ class ResultScreen extends StatelessWidget {
       width: double.infinity,
       child: Container(
         margin: const EdgeInsets.all(40),
-        child: Column(children: [
-          Text('You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          Text(
+            'You answered $numCorrectQuestions out of $numTotalQuestions questions correctly!',
+            style: const TextStyle(
+              color: Color.fromARGB(255, 226, 113, 211),
+              fontSize: 16,
+              fontWeight: FontWeight.bold
+            ),
+            ),
           const SizedBox(height: 30,),
           QuestionSummary(summaryData),
-          const Text('List of answers and questions...'),
           const SizedBox(height: 30,),
           ElevatedButton.icon(
             icon: const Icon(Icons.refresh),
